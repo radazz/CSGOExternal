@@ -22,7 +22,6 @@ namespace {
 
 	unsigned long dwLocalPlayer = 0xD36B94; // localplayer = noi
 	unsigned long dwForceJump = 0x51F4DB0; // pentru bhop
-	DWORD m_bIsDefusing = 0x391C;
 }
 
 /*
@@ -51,6 +50,7 @@ decltype(auto) Modul(unsigned long pID, const char* pNume) {
 		dupa aceea vom da return la adresa unde am gasit modulul cautat initial de catre noi
 	*/
 	do {
+		printf("Module [%s]\n", (const char*)m32.szModule);
 		if (!strcmp((const char*)m32.szModule, pNume)) {
 			printf("Modul [ %s ] a fost gasit la adresa [ %d ]\n", (const char*)m32.szModule, (unsigned long)m32.modBaseAddr);
 			CloseHandle(m_help);
@@ -77,6 +77,7 @@ decltype(auto) Proces(unsigned long pID, const char* pNume) {
 		m_processid = p32.th32ProcessID -> stocam pid-ul pentru Modul(pid, nume)
 	*/
 	while (Process32Next(m_createtool, &p32)) {
+		printf("Searching through process: [%s]\n", p32.szExeFile);
 		if (!strcmp((const char*)p32.szExeFile, pNume)) {
 			m_process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, p32.th32ProcessID);
 			m_processid = p32.th32ProcessID;
