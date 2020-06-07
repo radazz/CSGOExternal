@@ -139,7 +139,7 @@ int main() {
 	*/
 	if (Proces(m_processid, "csgo.exe")) {
 		// Initializam m_client pentru cand scriem si citim
-		m_client = Modul(m_processid, "client_panorama.dll");
+		m_client = Modul(m_processid, "client.dll");
 		// Daca m_client nu ia nicio valoare, aka daca nu gasim client_panorama atunci iesim din program
 		if (!m_client)
 			return 1;
